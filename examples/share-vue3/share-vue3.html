@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="../../dist/reset.css">
+    <link rel="stylesheet" href="../../dist/reveal.css">
+    <link rel="stylesheet" href="../../dist/theme/black.css">
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../../plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides" data-transition="convex-in concave-out">
+        <!--?封面-->
+        <section class="cover">
+            <h3 style="font-family:'STLiti',华文隶书"><font color="#3E7FEE">浅聊VUE3</font></h3>
+            <h5 style="text-transform:none">VUE3 🎉🎉🎉</h5>
+            <br />
+            <br />
+            <p> <small>分享By <a href="https://zhoufanglu.github.io/vuepressBlog/" target="_blank">卢方舟</a> </small> </p>
+        </section>
+
+        <!--?目录-->
+        <section style="text-align: left;" data-transition="convex-in concave-out">
+            <h5>目录</h5>
+            <hr style="transition:width 0.5s linear" />
+            <div class="catalog-p">
+                <p>一、带来的全新的构建工具</p>
+                <p>三、API的变化</p>
+            </div>
+            <hr />
+        </section>
+        <!--?全新的构建工具-->
+        <section data-transition="convex-in concave-out">
+            <!--Vite是什么？是一种全新的前端构建工具，开箱即用的构建工具的开发服务+打包工具组合-->
+            <section>
+                <h3>带来的全新的构建工具</h3>
+                <p><em>Vite</em></p>
+            </section>
+            <!--*webpack-->
+            <section>
+                <h4>Webpack-build</h4>
+                <p style="font-size: 25px">是一个静态模块打包工具，每个模块组合成n个<em>bundles</em>,静态资源展示。</p>
+                <!--<br>-->
+                <img src="../assets/share-vue3/webpack-a.gif" align="middle" />
+            </section>
+            <section style="text-align: left;">
+                <p style="font-size:25px">webpack</p>
+                <img style="height: 90%;width: 90%; margin-top: -10px;" src="../assets/share-vue3/webpack-b.png" align="middle" />
+            </section>
+            <section style="text-align: left;">
+                <p style="font-size:25px">webpack-code</p>
+                <div style="display: flex; align-items: center">
+                    <pre data-id="code-animation" style="width: 50%">
+                        <code class="hljs javascript" data-trim data-line-numbers>
+                        // a.js
+                        const a = () => {...}
+                        export { a }
+
+                        // b.js
+                        const b = () => {...}
+                        export { b }
+					</code>
+                    </pre>
+                    <i style="padding: 0 10px">+</i>
+                    <pre data-id="code-animation" style="width: 50%;">
+                        <code class="hljs javascript" data-trim data-line-numbers>
+                        // c.js
+                        import {a} from './a.js'
+                        import {b} from './b.js'
+
+                        const c = () => a() + b()
+
+                        export { c }
+					</code>
+                    </pre>
+                </div>
+                <div style="text-align: center">↓</div>
+                <pre data-id="code-animation" style="width: 70%; ">
+                    <code class="hljs javascript" data-trim data-line-numbers>
+                        // bundle.js
+                        const a = ()=>{...}
+                        const b = ()=>{...}
+                        const c = () => a() + b()
+
+                        export { c }
+					</code>
+                </pre>
+            </section>
+            <!--*vite-->
+            <section style="text-align: left;">
+                <p style="font-size:25px">so vite coming - hmr</p>
+                <pre data-id="code-animation">
+                    <code class="hljs sql" data-trim data-line-numbers>
+    +-----------------+               +-------------------+
+   |                 |               |                   |
+   |  Vite Dev Server| <-----------  | Browser or Client |
+   |                 |               |                   |
+   +-----------------+               +-------------------+
+           |                                  |
+           | (1) Request for module A         |
+           | -------------------------------->|
+           |                                  |
+           | (2) Resolve module A             |
+           |                                  |
+           | (3) Compile module A             |
+           |                                  |
+           | (4) Send module A to browser     |
+           | <--------------------------------|
+           |                                  |
+           | (5) Request for module B         |
+           | -------------------------------->|
+           |                                  |
+           | (6) Resolve module B             |
+           |                                  |
+           | (7) Compile module B             |
+           |                                  |
+           | (8) Send module B to browser     |
+           | <--------------------------------|
+           |                                  |
+           | ...                              |
+           |                                  |
+           | (9) Change made to module A      |
+           |                                  |
+           | (10) Recompile module A          |
+           |                                  |
+           | (11) Send update to browser      |
+           | <--------------------------------|
+           |                                  |
+           | (12) Update made in browser      |
+           |                                  |
+           | (13) Apply update to module A    |
+           |                                  |
+           | (14) Done                        |
+           | -------------------------------->|
+           |                                  |
+
+					</code>
+                </pre>
+            </section>
+            <section style="text-align: left">
+                <p style="font-size:25px">vite-compile</p>
+                <div class="my_div">
+                    <img width="1000" src="../assets/share-vue3/vite-b.png" align="middle" />
+                </div>
+            </section>
+            <section style="text-align: left">
+                <p style="font-size:25px">vite-demo</p>
+                <div class="my_div">
+                    <img width="" src="../assets/share-vue3/vitePage.png" align="middle" />
+                </div>
+            </section>
+            <section style="text-align: left">
+                <h4><em>vite</em>这种方式会有什么问题呢？</h4>
+                <div class="fragment" style="font-size: 30px;padding: 20px;color:#3e7fee;">
+                    如果模块过多，初始化会带来性能问题。
+                </div>
+                <h4 class="fragment">解决方案</h4>
+                <div class="fragment" style="font-size: 30px;padding: 20px;color:#3e7fee;">
+                    通过<em>optimize</em>指令，原理类似<em>webpack</em> 的 <em>dll-plugin</em>，提前将
+                    <em>package.json</em> 中的<em>dependencies</em> 打包成一个一个<em>ES Module</em> 模块
+                    这样在真面初始化时能减少大量请求
+                </div>
+            </section>
+        </section>
+        <!--?Vue3 目录-->
+        <section style="text-align: center" data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+            <h5>Vue 3.0 新特性</h5>
+            <ul>
+                <li>
+<!--                    <div data-id="box1" style="background: #999; width: 100px; height: 100px; margin: 10px; border-radius: 5px;"></div>-->
+                    <div data-id="box1"><em>Composition Api</em></div>
+                </li>
+<!--                <li><em>Composition Api</em></li>-->
+                <li>响应性 <em>Api</em></li>
+                <li>全局 <em>Api</em></li>
+            </ul>
+        </section>
+        <!--?Composition api-->
+        <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+            <div data-id="box1" data-auto-animate-delay=0" style=" ">
+                <em>Composition Api</em>
+            </div>
+<!--            <div data-id="box1" data-auto-animate-delay="0" style="background: cyan; width: 150px; height: 100px; margin: 10px;"></div>-->
+        </section>
+        <section>
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <h2>Auto-Animate1</h2>
+                <p>Automatically animate matching elements across slides with3232 <a href="https://revealjs.com/auto-animate/">Auto-Animate</a>.</p>
+                <div class="r-hstack justify-center">
+                    <div data-id="box1" style="background: #999; width: 100px; height: 100px; margin: 10px; border-radius: 5px;"></div>
+                    <div data-id="box2" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+                    <div data-id="box3" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+                </div>
+            </section>
+
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div class="r-hstack justify-center">
+                    <div data-id="box1" data-auto-animate-delay="0" style="background: cyan; width: 150px; height: 100px; margin: 10px;"></div>
+                    <div data-id="box2" data-auto-animate-delay="0.1" style="background: magenta; width: 150px; height: 100px; margin: 10px;"></div>
+                    <div data-id="box3" data-auto-animate-delay="0.2" style="background: yellow; width: 150px; height: 100px; margin: 10px;"></div>
+                </div>
+                <h2 style="margin-top: 20px;">Auto-Animate2</h2>
+            </section>
+
+        </section>
+
+
+</div>
+
+<script src="../../dist/reveal.js"></script>
+<script src="../../plugin/notes/notes.js"></script>
+<script src="../../plugin/markdown/markdown.js"></script>
+<script src="../../plugin/highlight/highlight.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+
+    // Learn about plugins: https://revealjs.com/plugins/
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+  });
+</script>
+</body>
+</html>
