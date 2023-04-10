@@ -189,26 +189,85 @@
             </div>
 <!--            <div data-id="box1" data-auto-animate-delay="0" style="background: cyan; width: 150px; height: 100px; margin: 10px;"></div>-->
         </section>
+        <!--?Composition api new-->
         <section>
+            <!--!不同的版本-->
             <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-                <h2>Auto-Animate1</h2>
-                <p>Automatically animate matching elements across slides with3232 <a href="https://revealjs.com/auto-animate/">Auto-Animate</a>.</p>
-                <div class="r-hstack justify-center">
-                    <div data-id="box1" style="background: #999; width: 100px; height: 100px; margin: 10px; border-radius: 5px;"></div>
-                    <div data-id="box2" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
-                    <div data-id="box3" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+                <h3>不同的版本，API的颠覆</h3>
+                <div style="display: flex;width: 100%; justify-content: center; padding-left: 10%">
+                    <div class="r-hstack justify-center" style="display: flex;flex-direction: column; justify-content: space-between">
+                        <div class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                            V2
+                        </div>
+                        <div class="vertical-center api-box" data-id="box2" style="position: relative;top: -83px">
+                            V3
+                        </div>
+                    </div>
+                    <div class="text" style="display: flex; flex-direction: column; justify-content: flex-start">
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="text-align: left; margin-left: 10px">options api</em>
+                            <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                一个功能分散到了不同的vue的配置项中 <!--项目大了比较混乱-->
+                            </div>
+                        </div>
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="margin-left: 10px;text-align: left">composition api</em>
+                            <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                代码根据逻辑功能来组织的，一个功能的所有api会放在一起
+                                <br>
+                                （高内聚，低耦合）
+                                <!--
+                                内聚：每个模块尽可能独立完成自己的功能，不依赖于模块外部的代码。
+                                耦合：模块与模块之间接口的复杂程度，模块之间联系越复杂耦合度越高，牵一发而动全身。
+                                -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
-
+            <!--!options-api-->
             <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-                <div class="r-hstack justify-center">
-                    <div data-id="box1" data-auto-animate-delay="0" style="background: cyan; width: 150px; height: 100px; margin: 10px;"></div>
-                    <div data-id="box2" data-auto-animate-delay="0.1" style="background: magenta; width: 150px; height: 100px; margin: 10px;"></div>
-                    <div data-id="box3" data-auto-animate-delay="0.2" style="background: yellow; width: 150px; height: 100px; margin: 10px;"></div>
+                <div class="r-hstack justify-center" style="display: flex;flex-direction: column">
+                    <div id="top" class="vertical-center">
+                        <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                            V2
+                        </div>
+                        <h3 data-id="box2">options-api</h3>
+                    </div>
+                    <!--<div class="big-big-box" data-id="box1" data-auto-animate-delay="0" style=" ">
+                        options-api
+                    </div>-->
+                    <!--<div class="big-big-box" data-id="box2" data-auto-animate-delay="0" style="background: magenta;">
+                        composition-api
+                    </div>-->
                 </div>
-                <h2 style="margin-top: 20px;">Auto-Animate2</h2>
+                <div class="content r-hstack">
+                        <img data-id="box-img" alt="" style="width: 40%" class="lazyload inited loaded" data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/568b0ced69f241d282cf2c512e4e5f33~tplv-k3u1fbpfcp-watermark.image" data-width="800" data-height="600" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/568b0ced69f241d282cf2c512e4e5f33~tplv-k3u1fbpfcp-watermark.image">
+                    <div class="right">
+                        <div class="fragment" style="font-size: 24px;margin-top: -140px; margin-left: 40px">
+                            <h4>缺点：</h4>
+                            <ul>
+                                <li>光标反复横跳</li>
+                                <li>mixins不够灵活</li>
+                                <li>this的多次使用</li>
+                                <li>typescript提示不太友好</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </section>
-
+            <!--!composition-api-->
+            <section data-auto-animate="">
+                <div class="r-hstack justify-center" style="display: flex;flex-direction: column">
+                    <img alt="" data-id="box-img" class="lazyload inited loaded" data-src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d05799744a6341fd908ec03e5916d7b6~tplv-k3u1fbpfcp-watermark.image" data-width="800" data-height="600" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d05799744a6341fd908ec03e5916d7b6~tplv-k3u1fbpfcp-watermark.image">
+                    <div id="top-com" class="vertical-center">
+                        <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                            V3
+                        </div>
+                        <h3 data-id="box2">composition-api</h3>
+                    </div>
+                </div>
+            </section>
         </section>
 
 
