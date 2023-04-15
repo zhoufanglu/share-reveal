@@ -40,5 +40,10 @@ em{
     /*background: cyan;*/
 }
 .text-border{
-    //outline: solid 1px red;
+    /*outline: solid 1px red;*/
+}
+
+.slides{
+    /*width: 1200px!important;*/
+    // border: solid 1px red;
 }

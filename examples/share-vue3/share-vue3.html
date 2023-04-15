@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -168,26 +168,27 @@
                     这样在真面初始化时能减少大量请求
                 </div>
             </section>
+            <!--?实际体验-->
+            <section>
+                <h4 style="margin-top: 50px"><em>vite / webpack</em>实际体验</h4>
+                <h7 style="font-size: 30px">计算平台-BDCP</h7>
+                <section data-markdown style="font-size: 36px; margin-top: 50px">
+                    |  构建工具  | 启动速度   | 生产构建速度 |
+                    |---------|-------|-------|
+                    | `vite 2.9`    | `127ms` | `7.518s` |
+                    | `webpack 4` | `15455ms` | `11.6s` |
+                </section>
+            </section>
         </section>
         <!--?Vue3 目录-->
         <section style="text-align: center" data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
             <h5>Vue 3.0 新特性</h5>
             <ul>
                 <li>
-<!--                    <div data-id="box1" style="background: #999; width: 100px; height: 100px; margin: 10px; border-radius: 5px;"></div>-->
-                    <div data-id="box1"><em>Composition Api</em></div>
+                    <em>Composition Api</em>
                 </li>
-<!--                <li><em>Composition Api</em></li>-->
                 <li>响应性 <em>Api</em></li>
-                <li>全局 <em>Api</em></li>
             </ul>
-        </section>
-        <!--?Composition api-->
-        <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-            <div data-id="box1" data-auto-animate-delay=0" style=" ">
-                <em>Composition Api</em>
-            </div>
-<!--            <div data-id="box1" data-auto-animate-delay="0" style="background: cyan; width: 150px; height: 100px; margin: 10px;"></div>-->
         </section>
         <!--?Composition api new-->
         <section>
@@ -199,7 +200,7 @@
                         <div class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
                             V2
                         </div>
-                        <div class="vertical-center api-box" data-id="box2" style="position: relative;top: -83px">
+                        <div class="vertical-center api-box" data-id="box2" style="position: relative;top: -113px">
                             V3
                         </div>
                     </div>
@@ -215,7 +216,9 @@
                             <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
                                 代码根据逻辑功能来组织的，一个功能的所有api会放在一起
                                 <br>
-                                （高内聚，低耦合）
+                                更加关注逻辑分离
+                                <br>
+                                高内聚，低耦合
                                 <!--
                                 内聚：每个模块尽可能独立完成自己的功能，不依赖于模块外部的代码。
                                 耦合：模块与模块之间接口的复杂程度，模块之间联系越复杂耦合度越高，牵一发而动全身。
@@ -247,17 +250,16 @@
                         <div class="fragment" style="font-size: 24px;margin-top: -140px; margin-left: 40px">
                             <h4>缺点：</h4>
                             <ul>
-                                <li>光标反复横跳</li>
-                                <li>mixins不够灵活</li>
-                                <li>this的多次使用</li>
-                                <li>typescript提示不太友好</li>
+                                <li style="margin-bottom: 6px;">mixin逻辑抽离不够灵活</li>
+                                <li style="margin-bottom: 6px;">this的多次使用</li>
+                                <li style="margin-bottom: 6px;">typescript提示不太友好</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
             <!--!composition-api-->
-            <section data-auto-animate="">
+            <section data-auto-animate>
                 <div class="r-hstack justify-center" style="display: flex;flex-direction: column">
                     <img alt="" data-id="box-img" class="lazyload inited loaded" data-src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d05799744a6341fd908ec03e5916d7b6~tplv-k3u1fbpfcp-watermark.image" data-width="800" data-height="600" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d05799744a6341fd908ec03e5916d7b6~tplv-k3u1fbpfcp-watermark.image">
                     <div id="top-com" class="vertical-center">
@@ -268,10 +270,144 @@
                     </div>
                 </div>
             </section>
+            <!--!代码对比-1-->
+            <section data-auto-animate>
+                <div id="top-com-2" class="vertical-center">
+                    <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                        1
+                    </div>
+                    <h3 data-id="box2">Page 对比</h3>
+                </div>
+                <img alt=""
+                     data-id="box-img"
+                     class="lazyload inited loaded"
+                     src="../assets/share-vue3/list.png"
+                >
+            </section>
+            <!--!代码对比-2-->
+            <section data-auto-animate>
+                <div style="position:relative;top: -10px;!important;">
+                    <div class="vertical-center">
+                        <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                            2
+                        </div>
+                        <h3 data-id="box2">VUE2-CODE</h3>
+                    </div>
+                    <pre data-id="code-animation" style="width: 1000px; height: 600px!important;">
+                    <code class="hljs javascript" data-trim data-line-numbers>
+                            export default {
+                                data() {
+                                  return {
+                                    // 过滤
+                                    filters: {},
+                                    // 表格
+                                    tableData: [],
+                                    // 分页
+                                    paginations: {}
+                                  }
+                                },
+                                created() {
+                                  this.getTableData()
+                                },
+                                methods: {
+                                  // 过滤
+                                  filterData() {...},
+                                  handleSearch() {...},
+                                  // 表格逻辑
+                                  getTableData() {...},
+                                  handleOperate(row, type) {...},
+                                  // 分页逻辑
+                                  handleCurrentChange(val) {...}
+                                }
+                            }
+					</code>
+                    </pre>
+                </div>
+            </section>
+            <!--!代码对比-3-->
+            <section data-auto-animate>
+                <div id="top-com-3" class="vertical-center">
+                    <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                        3
+                    </div>
+                    <h3 data-id="box2">VUE3-CODE</h3>
+                </div>
+                <pre data-id="code-animation" style="width: 1000px!important;">
+                    <code class="hljs javascript" data-trim data-line-numbers>
+                        <script>
+                          // 过滤
+                          const { filterData, handleSearch } = useSearch()
+
+                          // 表格逻辑
+                          const {
+                            tableData,
+                            getTableData,
+                            handleOperate
+                          } = useTable(api, filters)
+
+                          // 分页逻辑
+                          const { paginations, handleCurrentChange } = usePagination()
+                        </script>
+					</code>
+                    </pre>
+            </section>
         </section>
+        <!--?响应性API-->
+        <!--在vue2中，我们在data函数， props, computed定义的对象，都是默认响应式-->
+        <!--在vue3中，我们需要特定的函数来定义响应式变量-->
+        <section>
+            <!--!响应性原理-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <h3>响应性原理</h3>
+                <!--
+                    https://juejin.cn/post/7115439842841853982
+                    每个组件都会生成一个render函数
+                    render函数又会生成虚拟dom
 
+                    当我们执行render的时候，会触发data区域内的getter，然后产生依赖。 如果data内的变量被使用
+                    会被直接进行监听，
 
-</div>
+                -->
+
+                <img alt=""
+                     data-id="box-img"
+                     class="lazyload inited loaded"
+                     src="../assets/share-vue3/responsive.png"
+                >
+            </section>
+            <!--!优缺点-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <h3>响应式对比</h3>
+                <div style="display: flex;width: 100%; justify-content: center; padding-left: 10%">
+                    <div class="r-hstack justify-center" style="display: flex;flex-direction: column; justify-content: space-between">
+                        <div class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                            V2
+                        </div>
+                        <div class="vertical-center api-box" data-id="box2" style="position: relative;top: -113px">
+                            V3
+                        </div>
+                    </div>
+                    <div class="text" style="display: flex; flex-direction: column; justify-content: flex-start">
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="text-align: left; margin-left: 10px">Object.defineProperty()</em>
+                            <ul class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                <li>
+                                    对属性的读取、修改进行拦截（数据劫持）
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="margin-left: 10px;text-align: left">Proxy和Reflect</em>
+                            <ul class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                <li>通过Proxy（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。</li>
+                                <li>通过Reflect（反射）: 对源对象的属性进行操作。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
 
 <script src="../../dist/reveal.js"></script>
 <script src="../../plugin/notes/notes.js"></script>
