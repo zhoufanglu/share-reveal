@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>reveal.js</title>
+    <title>tog</title>
 
     <link rel="stylesheet" href="../../dist/reset.css">
     <link rel="stylesheet" href="../../dist/reveal.css">
@@ -31,8 +31,9 @@
             <h5>目录</h5>
             <hr style="transition:width 0.5s linear" />
             <div class="catalog-p">
-                <p>一、带来的全新的构建工具</p>
-                <p>三、API的变化</p>
+                <p>一、Vite</p>
+                <p>二、API的变化</p>
+                <p>三、响应式</p>
             </div>
             <hr />
         </section>
@@ -163,7 +164,7 @@
                 </div>
                 <h4 class="fragment">解决方案</h4>
                 <div class="fragment" style="font-size: 30px;padding: 20px;color:#3e7fee;">
-                    通过<em>optimize</em>指令，原理类似<em>webpack</em> 的 <em>dll-plugin</em>，提前将
+                    通过<em>optimize</em>指令，进行预构建，原理类似<em>webpack</em> 的 <em>dll-plugin</em>，提前将
                     <em>package.json</em> 中的<em>dependencies</em> 打包成一个一个<em>ES Module</em> 模块
                     这样在真面初始化时能减少大量请求
                 </div>
@@ -245,9 +246,9 @@
                     </div>-->
                 </div>
                 <div class="content r-hstack">
-                        <img data-id="box-img" alt="" style="width: 40%" class="lazyload inited loaded" data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/568b0ced69f241d282cf2c512e4e5f33~tplv-k3u1fbpfcp-watermark.image" data-width="800" data-height="600" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/568b0ced69f241d282cf2c512e4e5f33~tplv-k3u1fbpfcp-watermark.image">
+                    <img data-id="box-img" alt="" style="width: 40%" class="lazyload inited loaded" data-src="../assets/share-vue3/option-img.png" data-width="800" data-height="600" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/568b0ced69f241d282cf2c512e4e5f33~tplv-k3u1fbpfcp-watermark.image">
                     <div class="right">
-                        <div class="fragment" style="font-size: 24px;margin-top: -140px; margin-left: 40px">
+                        <div class="fragment" style="font-size: 24px;margin-top: -140px; margin-left: 45px">
                             <h4>缺点：</h4>
                             <ul>
                                 <li style="margin-bottom: 6px;">mixin逻辑抽离不够灵活</li>
@@ -261,7 +262,7 @@
             <!--!composition-api-->
             <section data-auto-animate>
                 <div class="r-hstack justify-center" style="display: flex;flex-direction: column">
-                    <img alt="" data-id="box-img" class="lazyload inited loaded" data-src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d05799744a6341fd908ec03e5916d7b6~tplv-k3u1fbpfcp-watermark.image" data-width="800" data-height="600" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d05799744a6341fd908ec03e5916d7b6~tplv-k3u1fbpfcp-watermark.image">
+                    <img alt="" data-id="box-img" class="lazyload inited loaded" data-src="../assets/share-vue3/composition-img.png" data-width="800" data-height="600" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d05799744a6341fd908ec03e5916d7b6~tplv-k3u1fbpfcp-watermark.image">
                     <div id="top-com" class="vertical-center">
                         <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
                             V3
@@ -392,6 +393,15 @@
                             <em class="text-border" style="text-align: left; margin-left: 10px">Object.defineProperty()</em>
                             <ul class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
                                 <li>
+                                    <!--1、通过Object.defineProperty()来劫持数据属性，将数据转换为getter,setter的形式
+                                        访问参数调用getter, 设置参数的时候调用setter。
+                                        2、发布者:订阅模式，在数据变动时，发布消息给订阅者，触发相应的监听回调， 订阅者收到消息后，
+                                        进行相应处理，更新试图。
+                                        缺点：
+                                            1、需要频繁的递归, 无法监听数组的变化，在给属性赋值对象的时候，需要再次递归处理，频繁递归，性能问题。
+                                            2、无法劫持对象的添加和删除属性操作，vue2新增了$delete, $set api
+                                            3、无法劫持数数组api，vue2重写了api，但是无法监听数组长度的变化(push,pop, shift, unshift..)
+                                    -->
                                     对属性的读取、修改进行拦截（数据劫持）
                                 </li>
                             </ul>
@@ -399,12 +409,35 @@
                         <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
                             <em class="text-border" style="margin-left: 10px;text-align: left">Proxy和Reflect</em>
                             <ul class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                <!--
+                                    1、Proxy: 代理，用于定义基本操作的自定义行为（如属性查找、赋值、枚举、函数调用等）。
+                                    2、Reflect: 反射，用于操作对象的内部方法。
+                                    监听的是整个对象，而不是单个属性，可以监听数组的变化，可以监听对象的添加和删除属性操作。
+                                -->
                                 <li>通过Proxy（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。</li>
                                 <li>通过Reflect（反射）: 对源对象的属性进行操作。</li>
                             </ul>
                         </div>
                     </div>
                 </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <ul>
+                    <li style="font-size: 30px; margin-bottom: 12px;">
+                        <em style="font-size: 32px">性能提升</em>：<br>Vue3使用了更快的虚拟DOM算法，减少了不必要的DOM操作，并采用了更高效的渲染机制，从而提升了性能。
+                    </li>
+                    <li  style="font-size: 30px; margin-bottom: 12px;">
+                        <em style="font-size: 32px">TypeScript支持</em>：<br>Vue3原生支持TypeScript，可以提供更好的类型检查和自动补全。
+                    </li>
+                    <li  style="font-size: 30px; margin-bottom: 12px;">
+                        <em style="font-size: 32px">更好的Tree-Shaking</em>：<br>Vue3使用了静态分析技术，使得Tree-Shaking更加精确和有效。
+                    </li>
+                    <li  style="font-size: 30px; margin-bottom: 12px;">
+                        <em style="font-size: 32px">新的内置指令</em>：<br>Vue3增加了一些新的内置指令，例如v-model、v-on、v-if等，使得指令的使用更加方便。
+                    </li>
+                </ul>
             </section>
         </section>
     </div>
