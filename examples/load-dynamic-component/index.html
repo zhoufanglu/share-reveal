@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>tog</title>
+
+    <link rel="stylesheet" href="../../dist/reset.css">
+    <link rel="stylesheet" href="../../dist/reveal.css">
+    <link rel="stylesheet" href="../../dist/theme/black.css">
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../../plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides" data-transition="convex-in concave-out">
+        <!--?封面-->
+        <section class="cover">
+            <h3 style="font-family:'STLiti',华文隶书"><font color="#3E7FEE">主题</font></h3>
+            <h5 style="text-transform:none">动态按需加载组件🎉</h5>
+            <br />
+            <br />
+            <p> <small>分享By <a href="https://zhoufanglu.github.io/vuepressBlog/" target="_blank">卢方舟</a> </small> </p>
+        </section>
+        <!--?目录-->
+        <section style="text-align: left;" data-transition="convex-in concave-out">
+            <h5 class="theme">目录</h5>
+            <hr style="transition:width 0.5s linear" />
+            <div class="catalog-p">
+                <p>一、监听滚动条</p>
+                <p>二、组件的动态加载</p>
+                <p>三、数据的更新</p>
+            </div>
+            <hr />
+        </section>
+        <!--?一、监听滚动条实现-->
+        <section data-transition="convex-in concave-out">
+            <!--!如何实现-->
+            <section>
+                <h3>question：</h3>
+                <p><em>前端如何实现一个下拉加载数据？</em></p>
+            </section>
+            <!--!方案1-->
+            <section>
+                <h4><label class="theme">方案 1</label>-监听滚动事件</h4>
+                <pre data-id="code-animation">
+                    <code class="hljs javascript" data-trim data-line-numbers>
+                      // 开始观察滚动触发元素
+                      const contentRef = ref()
+                      const handleScroll = () => {
+                        const container = contentRef.value
+                        // 判断是否滚动到底部
+                        if (
+                            container.scrollTop + container.clientHeight
+                            >=
+                            container.scrollHeight
+                        ) {
+                          loadMore()
+                        }
+                      }
+					</code>
+                    <code class="hljs html" data-trim data-line-numbers>
+                        <!--template-->
+                        <div ref="contentRef" @scroll="handleScroll">
+                            <div v-for="(i, index) in loadList" :key="index" class="card">{{ i }} -- {{ index }}</div>
+                        </div>
+					</code>
+                </pre>
+            </section>
+            <!--!方案2-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <h4 style="text-transform: none;"><label class="theme">方案2</label >-intersectionObserver</h4>
+                <div style="display: flex;width: 100%; justify-content: center; padding-left: 10%">
+                    <div class="r-hstack justify-center" style="display: flex;flex-direction: column; justify-content: space-between">
+                        <div class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                            1
+                        </div>
+                        <div class="vertical-center api-box" data-id="box2" style="position: relative;top: -113px">
+                            2
+                        </div>
+                    </div>
+                    <div class="text" style="display: flex; flex-direction: column; justify-content: flex-start">
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="text-align: left; margin-left: 10px">作用</em>
+                            <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                异步观察某个元素是否在某个视口内，元素是否相交。
+                            </div>
+                        </div>
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="margin-left: 10px;text-align: left">使用场景</em>
+                            <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                - 懒加载
+                                <br>
+                                - 无限滚动
+                                <br>
+                                - 计算广告可见度，估算收入
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--!3-实现--1-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div class="r-hstack justify-center" style="display: flex;flex-direction: column">
+                    <div id="top" class="vertical-center">
+                        <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                            3
+                        </div>
+                        <h3 data-id="box2"><em>实现思路</em></h3>
+                    </div>
+                </div>
+                <div class="content r-hstack">
+                    <img data-id="box-img" alt="" style="width: 50%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/list-think.png" >
+                    <div class="right">
+                        <div class="fragment" style="font-size: 24px;margin-top: -140px; margin-left: 45px">
+<!--                            <h4>缺点：</h4>-->
+                            <div style="display: flex; flex-direction: column;justify-content: flex-start;align-items: flex-start">
+                                <span style="margin-bottom: 6px;">1、观察浏览器视口，用户可见部分</span>
+                                <span style="margin-bottom: 6px;">2、监视绿色区</span>
+                                <span style="margin-bottom: 6px;">3、触发回调</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--!4-主要代码-->
+            <section style="text-align: left;" data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div style="font-size:25px; display: flex;align-items: center;" class="theme" >
+                    <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                        4
+                    </div>
+                    <em>主要代码:</em>
+                </div>
+                <div style="display: flex; align-items: center">
+                    <pre data-id="code-animation" style="width: 100%">
+                        <!--<code class="hljs javascript" data-trim data-line-numbers>
+                            <template>
+                              <ul class="p-scroll">
+                                &lt;!&ndash;?列表区域&ndash;&gt;
+                                <li v-for="(i, index) in loadList" :key="index" class="card">
+                                    {{ i }} &#45;&#45; {{ index }}
+                                </li>
+                                  &lt;!&ndash;?IntersectionObserver监听的对象&ndash;&gt;
+                                <li ref="observerElement" class="observer-element">监听的dom</li>
+                              </ul>
+                            </template>
+					    </code>
+                        <br>-->
+                        <code class="hljs javascript" data-trim data-line-numbers>
+                            let observer = new IntersectionObserver(
+                              (entries) => {
+                                entries.forEach((entry) => {
+                                  if (entry.intersectionRatio >= 0) {
+                                    console.log('进入可视区域')
+                                    loadMore()
+                                  } else {
+                                    console.log('不可见')
+                                  }
+                                })
+                              },
+                            )
+                            observer.observe(observerElement.value!)
+					    </code>
+                    </pre>
+
+                </div>
+            </section>
+            <!--!5-对比-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div style="font-size:25px; display: flex;align-items: center;" class="theme" >
+                    <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                        5
+                    </div>
+                    <em>对比数据:  </em>
+                    <p style="font-size: 20px">下拉加载300条数据</p>
+                </div>
+                <section data-markdown style="font-size: 30px; margin-top: 50px">
+                    |  无限滚动   | JS Heap  | Documents| Listeners|
+                    |  ----  | --------  |----|----|
+                    | `scroll监听 `  | `12.5MB ~ 13.6MB` |4-4|94|
+                    | `intersectionObserver`  | `6.3MB ~ 7.4MB` |1-2|50|
+                </section>
+                <hr>
+                <div class="fragment" style="font-size: 24px;">
+                    <!--                            <h4>缺点：</h4>-->
+                    <div style="display: flex; flex-direction: column;justify-content: flex-start;align-items: flex-start">
+                        <p class="theme" style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用<em>intersectionObserver</em>监听 ， 我们可以看到内存只占用了<em>scroll的50%</em>, 这还是300条数据的情况下，这性能差距肯定是指数级拉开的，所以用哪个就不言而喻了。</p>
+                    </div>
+                </div>
+            </section>
+            <!--!6-快的原因-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div style="font-size:25px; display: flex;align-items: center;" class="theme" >
+                    <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
+                        6
+                    </div>
+                    <text style="font-size: 30px">快的原因:  </text>
+                </div>
+                <div style="display: flex;width: 100%; justify-content: center; padding-left: 10%">
+                    <div class="text" style="display: flex; flex-direction: column; justify-content: flex-start">
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="text-align: left; margin-left: 10px;font-size: 25px">异步执行</em>
+                            <ul class="" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                <li>
+                                    IntersectionObserver 是异步执行的，它使用回调函数在元素进入或离开视口时触发，而不是像监听 scroll 事件一样在每次滚动时都触发。这样可以减少回调函数的执行次数，降低了性能开销。
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                            <em class="text-border" style="margin-left: 10px;text-align: left;font-size: 25px">硬件加速</em>
+                            <ul class="" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                <li>使用浏览器底层的硬件加速技术来进行计算。scroll 事件则需要频繁地进行 DOM 查询和计算，性能消耗较大</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!--        <section></section>-->
+        </section>
+        <!--?二、组件的动态引入-->
+        <section data-transition="convex-in concave-out">
+            <section>
+                <h4><label class="theme">二</label>-组件的动态加载</h4>
+            </section>
+        </section>
+        <!--?三、数据的更新-->
+    </div>
+</div>
+
+<script src="../../dist/reveal.js"></script>
+<script src="../../plugin/notes/notes.js"></script>
+<script src="../../plugin/markdown/markdown.js"></script>
+<script src="../../plugin/highlight/highlight.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+
+    // Learn about plugins: https://revealjs.com/plugins/
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+  });
+</script>
+</body>
+</html>
