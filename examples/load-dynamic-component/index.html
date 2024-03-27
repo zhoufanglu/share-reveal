@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>tog</title>
+    <title>动态加载组件</title>
 
     <link rel="stylesheet" href="../../dist/reset.css">
     <link rel="stylesheet" href="../../dist/reveal.css">
@@ -19,18 +19,23 @@
     <div class="slides" data-transition="convex-in concave-out">
         <!--?封面-->
         <section class="cover">
-            <h3 style="font-family:'STLiti',华文隶书"><font color="#3E7FEE">主题</font></h3>
-            <h5 style="text-transform:none">动态按需加载组件🎉</h5>
-            <br />
-            <br />
-            <p> <small>分享By <a href="https://zhoufanglu.github.io/vuepressBlog/" target="_blank">卢方舟</a> </small> </p>
+            <section>
+                <h3 style="font-family:'STLiti',华文隶书"><font color="#3E7FEE">主题</font></h3>
+                <h5 style="text-transform:none">按需加载组件功能的实现</h5>
+                <br />
+                <br />
+                <p> <small>分享By <a href="https://github.com/zhoufanglu" target="_blank">卢方舟</a> </small> </p>
+            </section>
+            <section>
+                <img data-id="box-img" alt="" style="width: 100%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/defineAsyncComponent-1.gif" >
+            </section>
         </section>
         <!--?目录-->
         <section style="text-align: left;" data-transition="convex-in concave-out">
             <h5 class="theme">目录</h5>
             <hr style="transition:width 0.5s linear" />
             <div class="catalog-p">
-                <p>一、监听滚动条</p>
+                <p>一、无限滚动的实现</p>
                 <p>二、组件的动态加载</p>
                 <p>三、数据的更新</p>
             </div>
@@ -54,8 +59,7 @@
                         const container = contentRef.value
                         // 判断是否滚动到底部
                         if (
-                            container.scrollTop + container.clientHeight
-                            >=
+                            container.scrollTop + container.clientHeight >=
                             container.scrollHeight
                         ) {
                           loadMore()
@@ -221,9 +225,81 @@
 <!--        <section></section>-->
         </section>
         <!--?二、组件的动态加载-->
-        <section data-transition="convex-in concave-out">
+        <section  data-transition="convex-in concave-out">
+            <!--!page-1 问题抛出-->
             <section>
-                <h4><label class="theme">二</label>-组件的动态加载</h4>
+                <h3>question：</h3>
+                <p><em>一个页面有30个组件如何处理？</em></p>
+            </section>
+            <!--!page-2 api介绍-->
+            <section>
+                <h3><label class="theme">二  </label>组件的动态加载</h3>
+                <div class="fragment">
+                    <div style="display: flex;width: 100%; justify-content: center; padding-left: 10%">
+                        <div class="r-hstack justify-center" style="display: flex;flex-direction: column; justify-content: space-between">
+                            <div class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                                1
+                            </div>
+                            <div class="vertical-center api-box" data-id="box2" style="position: relative;top: -113px">
+                                2
+                            </div>
+                        </div>
+                        <div class="text" style="display: flex; flex-direction: column; justify-content: flex-start">
+                            <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                                <em class="text-border" style="text-align: left; margin-left: 10px">component </em>
+                                <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                    动态组件, 经常配合 <em>import.meta.glob</em>使用。
+                                </div>
+                            </div>
+                            <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
+                                <em class="text-border" style="margin-left: 10px;text-align: left">defineAsyncComponent</em>
+                                <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
+                                    异步组件， 在需要的时候加载。
+                                    <br>
+                                    <br>
+<!--                                    更加关注逻辑分离-->
+                                    <br>
+<!--                                    高内聚，低耦合-->
+                                    <!--
+                                    内聚：每个模块尽可能独立完成自己的功能，不依赖于模块外部的代码。
+                                    耦合：模块与模块之间接口的复杂程度，模块之间联系越复杂耦合度越高，牵一发而动全身。
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--!page-3 组件导入-->
+            <section>
+                <h4>组件的导入</h4>
+                <h5 style="font-size: 30px" class="theme">同步</h5>
+                <pre data-id="code-animation">
+                    <code class="hljs" data-trim data-line-numbers>
+                    import A form './A.vue'
+                    import B form './B.vue'
+                    import C form './C.vue'
+                    ...
+                    </code>
+                </pre>
+                <h5 style="font-size: 30px" class="theme">异步</h5>
+                <pre data-id="code-animation">
+                    <code class="hljs js" data-trim data-line-numbers>
+                      const loadComponent = (name: string) =>
+                      defineAsyncComponent({
+                        loader: () => import(`./${name}.vue`),
+                      })
+                    </code>
+                </pre>
+            </section>
+            <!--!page-4 流程-->
+            <section>
+                <h4>实现流程</h4>
+                <img data-id="box-img" alt="" style="width: 70%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/workflow.png" >
+            </section>
+            <!--!page-5 代码-->
+            <section>
+                <h4 class="theme">代码</h4>
             </section>
         </section>
         <!--?三、数据的更新-->
