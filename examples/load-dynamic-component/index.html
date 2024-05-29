@@ -29,9 +29,6 @@
                 <img data-id="box-img" alt="" class="lazyload inited loaded avatar" data-src="../assets/avatar.png" >
 
             </section>
-            <section>
-                <img data-id="box-img" alt="" style="width: 100%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/defineAsyncComponent-1.gif" >
-            </section>
         </section>
         <!--?目录-->
         <section style="text-align: left;" data-transition="convex-in concave-out">
@@ -232,7 +229,7 @@
             <!--!page-1 问题抛出-->
             <section>
                 <h3>question：</h3>
-                <p><em>一个页面有30个组件如何处理？</em></p>
+                <p><em>一个页面有100个组件如何处理？</em></p>
             </section>
             <!--!page-2 api介绍-->
             <section>
@@ -251,13 +248,13 @@
                             <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
                                 <em class="text-border" style="text-align: left; margin-left: 10px">component </em>
                                 <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
-                                    动态组件, 经常配合 <em>import.meta.glob</em>使用。
+                                    动态导入组件, 经常配合 <em>import.meta.glob</em>使用。
                                 </div>
                             </div>
                             <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
                                 <em class="text-border" style="margin-left: 10px;text-align: left">defineAsyncComponent</em>
                                 <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
-                                    异步组件， 在需要的时候加载。
+                                    异步导入组件， 在需要的时候加载。
                                     <br>
                                     <br>
 <!--                                    更加关注逻辑分离-->
@@ -289,9 +286,9 @@
                 <pre data-id="code-animation">
                     <code class="hljs js" data-trim data-line-numbers>
                       const loadComponent = (name: string) =>
-                      defineAsyncComponent({
-                        loader: () => import(`./${name}.vue`),
-                      })
+                          defineAsyncComponent({
+                            loader: () => import(`./${name}.vue`),
+                          })
                     </code>
                 </pre>
             </section>
@@ -301,11 +298,97 @@
                 <img data-id="box-img" alt="" style="width: 70%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/workflow.png" >
             </section>
             <!--!page-5 代码-->
+            <section class="page-5-code">
+                <h4 style="text-transform: none;" class="theme">代码</h4>
+                <!--<ul>
+                    <li>template</li>
+                    <pre data-id="code-animation">
+                    <code class="hljs html" data-trim data-line-numbers>
+                        <template v-for="(i, index) in components" :key="index">
+                            <component :is="i.component"
+                                       v-if="displayComponents.includes(i.name)" >
+                            </component>
+                        </template>
+                        &lt;!&ndash;?IntersectionObserver监听的对象&ndash;&gt;
+                        <div ref="observerElement" class="observer-element">监听的dom</div>
+                    </code>
+                    </pre>
+
+                    <li>js</li>
+                </pre>
+                </ul>-->
+
+            </section>
+            <!--!page-6 效果-->
             <section>
-                <h4 class="theme">代码</h4>
+                <h4 style="text-transform: none;" class="theme">实现效果</h4>
+                <img data-id="box-img" alt="" style="width: 100%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/defineAsyncComponent-1.gif" >
             </section>
         </section>
         <!--?三、数据的更新-->
+        <section data-transition="convex-in concave-out">
+            <!--!1、模块结构-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div class="vertical-center">
+                    <div style="margin-top: 8px;" class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                        1
+                    </div>
+                    <em>基本模块结构</em>
+                </div>
+                 <img data-id="box-img" alt="" style="width: 80%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/3-1.png" >
+            </section>
+            <!--!2、模块结构 * 10-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div class="vertical-center">
+                    <div style="margin-top: 8px;" class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                        2
+                    </div>
+                    <em>基本模块结构 x 10</em>
+                </div>
+                <img data-id="box-img" alt="" style="width: 100%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/3-2.png" >
+            </section>
+            <!--!3、刷新操作-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div class="vertical-center">
+                    <div style="margin-top: 8px;" class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                        3
+                    </div>
+                    <em>刷新组件 - hooks</em>
+                </div>
+                <pre data-id="code-animation" style="width: 100%; height: 110%">
+                        <code class="hljs javascript" data-trim data-line-numbers>
+function useRefreshComponent() {
+  const componentVisible = ref(true)
+
+  const refresh = async () => {
+    componentVisible.value = false
+    await nextTick(() => {
+      componentVisible.value = true
+    })
+  }
+  return {
+    refresh,
+    componentVisible,
+  }
+}
+export { useRefreshComponent }
+					    </code>
+                    </pre>
+            </section>
+            <!--!4、实战效果-->
+            <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+                <div class="vertical-center">
+                    <div style="margin-top: 8px;" class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
+                        4
+                    </div>
+                    <em>实战效果</em>
+                </div>
+                                <img data-id="box-img" alt="" style="width: 100%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/hong-qiao-trade.awebp" >
+            </section>
+        </section>
+        <section>
+            <em>谢谢聆听~</em>
+        </section>
     </div>
 </div>
 
