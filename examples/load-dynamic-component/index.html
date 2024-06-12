@@ -46,7 +46,7 @@
             <!--!如何实现-->
             <section>
                 <h3>question：</h3>
-                <p><em>前端如何实现一个下拉加载数据？</em></p>
+                <p><em>如何实现一个下拉加载数据？</em></p>
             </section>
             <!--!方案1-->
             <section>
@@ -136,7 +136,7 @@
                     <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
                         4
                     </div>
-                    <em>主要代码:</em>
+                    <em>主要代码: <a target="_blank" href="https://github.com/zhoufanglu/vue3-vite-ts/blob/master/src/views/test/scroll-observer/index.vue">查看完整代码</a></em>
                 </div>
                 <div style="display: flex; align-items: center">
                     <pre data-id="code-animation" style="width: 100%">
@@ -155,7 +155,7 @@
                         <br>-->
                         <code class="hljs javascript" data-trim data-line-numbers>
                             let observer = new IntersectionObserver(
-                              (entries) => {
+                              (entries) => { // entries就是监听的dom
                                 entries.forEach((entry) => {
                                   if (entry.intersectionRatio >= 0) {
                                     console.log('进入可视区域')
@@ -233,7 +233,7 @@
             </section>
             <!--!page-2 api介绍-->
             <section>
-                <h3><label class="theme">二  </label>组件的动态加载</h3>
+                <h3><label class="theme">二、  </label>组件的动态加载</h3>
                 <div class="fragment">
                     <div style="display: flex;width: 100%; justify-content: center; padding-left: 10%">
                         <div class="r-hstack justify-center" style="display: flex;flex-direction: column; justify-content: space-between">
@@ -248,7 +248,7 @@
                             <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
                                 <em class="text-border" style="text-align: left; margin-left: 10px">component </em>
                                 <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
-                                    动态导入组件, 经常配合 <em>import.meta.glob</em>使用。
+                                    动态导入组件, 经常配合 <em>require.context</em> / <em>import.meta.glob</em>使用。
                                 </div>
                             </div>
                             <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
@@ -299,7 +299,9 @@
             </section>
             <!--!page-5 代码-->
             <section class="page-5-code">
-                <h4 style="text-transform: none;" class="theme">代码</h4>
+                <h4 style="text-transform: none;" class="theme">
+                    <a target="_blank" href="https://github.com/zhoufanglu/vue3-vite-ts/blob/master/src/views/test/load-components/index.vue" style="font-size: 40px">查看代码</a>
+                </h4>
                 <!--<ul>
                     <li>template</li>
                     <pre data-id="code-animation">
