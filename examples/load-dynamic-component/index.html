@@ -35,7 +35,7 @@
             <h5 class="theme">目录</h5>
             <hr style="transition:width 0.5s linear" />
             <div class="catalog-p">
-                <p>一、无限滚动的实现</p>
+                <p>一、无限滚动的监听</p>
                 <p>二、组件的动态加载</p>
                 <p>三、数据的更新</p>
             </div>
@@ -46,7 +46,8 @@
             <!--!如何实现-->
             <section>
                 <h3>question：</h3>
-                <p><em>如何实现一个下拉加载数据？</em></p>
+                <p><em>如何实现一个数据无限滚动？</em></p>
+                <img data-id="box-img" alt="" style="width: 50%" class="lazyload inited loaded" data-src="../assets/load-dynamic-component/scroll-demo.gif" >
             </section>
             <!--!方案1-->
             <section>
@@ -76,7 +77,11 @@
             </section>
             <!--!方案2-->
             <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-                <h4 style="text-transform: none;"><label class="theme">方案2</label >-intersectionObserver</h4>
+                <h4 style="text-transform: none;"><label class="theme">方案2</label > -
+                    <a style="font-size: 42px" target="_blank" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API">
+                        intersectionObserver
+                    </a>
+                </h4>
                 <div style="display: flex;width: 100%; justify-content: center; padding-left: 10%">
                     <div class="r-hstack justify-center" style="display: flex;flex-direction: column; justify-content: space-between">
                         <div class="vertical-center api-box" data-id="box1" style="margin-top: 16px">
@@ -90,7 +95,8 @@
                         <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
                             <em class="text-border" style="text-align: left; margin-left: 10px">作用</em>
                             <div class="fragment" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
-                                异步观察某个元素是否在某个视口内，元素是否相交。
+                                -异步观察某个元素是否在某个视口内 <br>
+                                -元素是否相交 <br>
                             </div>
                         </div>
                         <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
