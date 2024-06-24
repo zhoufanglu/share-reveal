@@ -24,7 +24,7 @@
                 <h5 style="text-transform:none">组件懒加载的实现</h5>
                 <br />
 <!--                <br />-->
-                <p> <small>分享By <a href="https://github.com/zhoufanglu" target="_blank">tog</a> </small>
+                <p> <small>by <a href="https://github.com/zhoufanglu" target="_blank">lufangzhou</a> </small>
                 </p>
                 <img style="width: 120px;height: 120px;" data-id="box-img" alt="" class="lazyload inited loaded avatar" data-src="../assets/avatar.png" >
 
@@ -130,7 +130,7 @@
                             <div style="display: flex; flex-direction: column;justify-content: flex-start;align-items: flex-start">
                                 <span style="margin-bottom: 6px;">1、观察浏览器视口，用户可见部分</span>
                                 <span style="margin-bottom: 6px;">2、监视绿色区</span>
-                                <span style="margin-bottom: 6px;">3、触发回调</span>
+                                <span style="margin-bottom: 6px;">3、触发加载函数</span>
                             </div>
                         </div>
                     </div>
@@ -172,6 +172,7 @@
                                 })
                               },
                             )
+                            // 打开监听
                             observer.observe(observerElement.value!)
 					    </code>
                     </pre>
@@ -184,8 +185,8 @@
                     <div class="left api-box api-box-round" data-id="box1" data-auto-animate-delay="0">
                         5
                     </div>
-                    <em>对比数据:  </em>
-                    <p style="font-size: 20px">下拉加载300条数据</p>
+                    <em>性能对比:     </em>
+                    <p style="font-size: 20px; margin-left: 10px">滚动加载300条数据</p>
                 </div>
                 <section data-markdown style="font-size: 30px; margin-top: 50px">
                     |  无限滚动   | JS Heap  | Documents| Listeners|
@@ -215,14 +216,16 @@
                             <em class="text-border" style="text-align: left; margin-left: 10px;font-size: 25px">异步执行</em>
                             <ul class="" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
                                 <li>
-                                    IntersectionObserver 是异步执行的，它使用回调函数在元素进入或离开视口时触发，而不是像监听 scroll 事件一样在每次滚动时都触发。这样可以减少回调函数的执行次数，降低了性能开销。
+                                    IntersectionObserver 是使用`浏览器的任务调度系统`异步处理的，这意味着观察者的回调函数不会直接阻塞主线程。
+                                    <br>
+                                    从而减少对渲染性能的影响。
                                 </li>
                             </ul>
                         </div>
                         <div class="text-border" style="display: flex;flex-direction: column;justify-content: flex-start">
                             <em class="text-border" style="margin-left: 10px;text-align: left;font-size: 25px">硬件加速</em>
                             <ul class="" style="font-size: 24px;color:#3e7fee; text-align: left; padding: 10px;">
-                                <li>使用浏览器底层的硬件加速技术来进行计算。scroll 事件则需要频繁地进行 DOM 查询和计算，性能消耗较大</li>
+                                <li>使用浏览器底层的硬件加速技术来进行计算。scroll 事件则需要频繁地进行 DOM 查询、计算和重排操作，性能消耗较大。</li>
                             </ul>
                         </div>
                     </div>
@@ -335,6 +338,10 @@
         </section>
         <!--?三、数据的更新-->
         <section data-transition="convex-in concave-out">
+            <!--!page-1 问题抛出-->
+            <section>
+                <h3><label class="theme">三、  </label>组件数据的更新</h3>
+            </section>
             <!--!1、模块结构-->
             <section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
                 <div class="vertical-center">
